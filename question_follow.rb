@@ -55,7 +55,7 @@ class QuestionFollow
   def self.most_followed_questions(num_of_questions_to_return)
     results = QuestionsDatabase.instance.execute(<<-SQL, num_of_questions_to_return)
     SELECT
-      *
+      questions.*
     FROM
       question_follows
     JOIN

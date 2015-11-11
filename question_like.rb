@@ -69,4 +69,24 @@ class QuestionLike
     SQL
     results.map {|result| Question.new(result)}
   end
+
+  def self.most_liked_questions(n)
+
+    results = QuestionsDatabase.instance.execute(<<-SQL, n)
+      SELECT
+        questions.*
+      FROM
+        question_likes
+      JOIN
+        questions ON questions.id = question_likes.question_id
+      GROUP BY
+        questions.id
+      ORDER BY
+        COUNT(question_likes.question_id) DESC
+      LIMIT
+        ?
+
+      SQL
+        results.map { |result| Question.new(result) }
+  end
 end

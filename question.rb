@@ -31,27 +31,31 @@ class Question
   end
 
   def author
-    User.find_by_id(@author_id)
+    User.find_by_id(author_id)
   end
 
   def replies
-    Reply.find_by_question_id(@id)
+    Reply.find_by_question_id(id)
   end
 
   def followers
     QuestionFollow.followers_for_question_id(id)
   end
 
-  def self.most_followed
-    QuestionFollow.most_followed_questions(1)
+  def self.most_followed(n)
+    QuestionFollow.most_followed_questions(n)
   end
 
   def likers
-    QuestionLike.likers_for_question_id(@id)
+    QuestionLike.likers_for_question_id(id)
   end
 
   def num_likes
-    QuestionLike.num_likes_for_question_id(@id)
+    QuestionLike.num_likes_for_question_id(id)
+  end
+
+  def self.most_liked(n)
+    QuestionLike.most_liked_questions(n)
   end
 
 
